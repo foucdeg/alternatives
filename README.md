@@ -1,2 +1,2 @@
-# alternatives
-API for hosting polls
+# Alternatives
+An API for hosting polls.

@@ -1,0 +1,22 @@
+{
+  "name": "alternatives",
+  "version": "0.0.1",
+  "description": "API for hosting polls",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "keywords": [
+    "poll"
+  ],
+  "author": "Foucauld Degeorges",
+  "license": "Beerware",
+  "dependencies": {
+    "express": "^4.15.2"
+  },
+  "devDependencies": {
+    "shipit-deploy": "^2.4.0",
+    "shipit-yarn": "^0.2.0"
+  }
+}
