@@ -1,5 +1,6 @@
 module.exports = function (shipit) {
   require('shipit-deploy')(shipit);
+  require('shipit-yarn')(shipit);
 
   shipit.initConfig({
     default: {
@@ -18,7 +19,7 @@ module.exports = function (shipit) {
     staging: {
       servers: [
         {
-          host: 'vps'
+          host: 'vps',
           user: 'fouc'
         }
       ]
@@ -29,7 +30,7 @@ module.exports = function (shipit) {
     shipit.remote('pm2 reload  ecosystem.config.js --only alternatives');
   });
 
-  shipit.on(['deployed', 'rollbacked'], () => {
+  shipit.on('deployed', () => {
     shipit.start('pm2-reload');
     shipit.emit('reloaded');
   });
