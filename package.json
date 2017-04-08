@@ -10,7 +10,7 @@
   "keywords": [
     "poll"
   ],
-  "author": "Foucauld Degeorges",
+  "author": "Foucauld Degeorges <foucauld.degeorges@gmail.com>",
   "license": "Beerware",
   "dependencies": {
     "express": "^4.15.2",
