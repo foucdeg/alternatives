@@ -1,6 +1,7 @@
 module.exports = function (shipit) {
   require('shipit-deploy')(shipit);
   require('shipit-yarn')(shipit);
+  require('shipit-shared')(shipit);
 
   shipit.initConfig({
     default: {
@@ -13,7 +14,14 @@ module.exports = function (shipit) {
       shallowClone: true,
       yarn: {
         remote: true,
-        installFlags: ['--production']
+        installFlags: ['--production'],
+        triggerEvent: 'sharedEnd'
+      },
+      shared: {
+        overwrite: true,
+        files: [
+          'config/db.json'
+        ]
       }
     },
     staging: {

@@ -1,0 +1,3 @@
+{
+  "dbConnection": "mongodb://fouc:<PASSWORD>@prodcluster-shard-00-00-urx9o.mongodb.net:27017,prodcluster-shard-00-01-urx9o.mongodb.net:27017,prodcluster-shard-00-02-urx9o.mongodb.net:27017/alternatives?ssl=true&replicaSet=ProdCluster-shard-0&authSource=admin"
+}
