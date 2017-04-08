@@ -19,9 +19,8 @@ module.exports = function (shipit) {
       },
       shared: {
         overwrite: true,
-        files: [
-          'config/db.json'
-        ]
+        files: ['config/db.json'],
+        dirs: ['node_modules']
       }
     },
     staging: {

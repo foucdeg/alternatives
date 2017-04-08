@@ -13,11 +13,12 @@
   "author": "Foucauld Degeorges",
   "license": "Beerware",
   "dependencies": {
-    "express": "^4.15.2"
+    "express": "^4.15.2",
+    "mongodb": "^2.2.25"
   },
   "devDependencies": {
     "shipit-deploy": "^2.4.0",
-    "shipit-yarn": "^0.2.0",
-    "shipit-shared": "^4.4.2"
+    "shipit-shared": "^4.4.2",
+    "shipit-yarn": "^0.2.0"
   }
 }
