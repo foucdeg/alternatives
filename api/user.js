@@ -1,19 +1,15 @@
 let userApp = require('express').Router();
-let apiValidationSchemas = require('./schemas');
+const Alternative = require('../models').Alternative;
 
-userApp.get('/:id/', (req, res) => {
-  res.send({ id: req.params.id });
+userApp.get(/^\/([0-9a-f]+)$/, (req, res) => {
+  console.log('in route');
+  return Alternative.findOne({_id: req.params[0]}).then((alt) => {
+    res.send(alt);
+  });
 });
 
 userApp.post('/:id/vote', (req, res) => {
-  req.checkBody(apiValidationSchemas.userPostVote);
-  req.getValidationResult().then((results) => {
-    if (!results.isEmpty()) {
-      res.status(400).send(results.mapped());
-      return;
-    }
-    res.status(201).send({status: 'OK'});
-  });
+  res.status(201).send({status: 'OK'});
 });
 
 module.exports = userApp;

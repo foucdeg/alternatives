@@ -1,34 +1,39 @@
-const dbConfig = require('./config/db');
 const pjson = require('./package');
-const userApp = require('./api/user');
 const bodyParser = require('body-parser');
-let app = require('express')();
-let MongoClient = require('mongodb').MongoClient;
+const dbConfig = require('./config/db');
+const mongoose = require('mongoose');
+const Alternative = require('./models').Alternative;
+mongoose.Promise = global.Promise;
 
-MongoClient.connect(dbConfig.uri, function(err, db) {
-  console.log('Connected to db');
-});
+mongoose.connect(dbConfig.uri);
 
-app.use(bodyParser.json());
-app.use(require('express-validator')());
+let db = mongoose.connection;
+db.on('error', console.error.bind(console, 'database connection error:'));
+db.once('open', () => {
+  console.log('Connected to the database');
 
-app.use((req, res, next) => {
-  res.set('Content-Type', 'application/json');
-  next();
-});
+  let app = require('express')();
+  app.use(bodyParser.json());
+  app.use(require('express-validator')());
 
+  app.use((req, res, next) => {
+    res.set('Content-Type', 'application/json');
+    next();
+  });
 
-app.get('/', (req, res) => {
-  res.send((({ name, version, description, author }) => ({ name, version, description, author }))(pjson));
-});
+  app.get('/', (req, res) => {
+    res.send((({ name, version, description, author }) => ({ name, version, description, author }))(pjson));
+  });
 
-app.use('/', userApp);
+  app.use('/', require('./api/user'));
+  app.use('/', require('./api/admin'));
 
-app.use((err, req, res, next) => {
-  res.status(500).send({ error: err.message });
-  next();
-});
+  app.use((err, req, res, next) => {
+    res.status(500).send({ error: err.message });
+    next();
+  });
 
-app.listen(5678, () => {
-  console.log('API listening on port 5678');
+  app.listen(5678, () => {
+    console.log('API listening on port 5678');
+  });
 });
